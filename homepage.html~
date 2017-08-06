@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registration</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+<div class="container">
+  <div class="jumbotron">
+  <p style='color=blue'><h2>Register Here!</h2></p>
+<form id="register" action="registration.php" method="POST" class="register" enctype="multipart/form-data">
+<div id="name"><label>Name:      </label><input type="text" name="name"  onBlur="check('name',this.value)" 
+onkeyup="check('name',this.value)"></div><span id="nameerror"></span><br>
+<div id="RollNumber"><label id="rollno">Roll Number:  </label><input type="text" name="rollno" id="rollno" onBlur="check('rollno',this.value)" onkeyup="check('rollno',this.value)"></div><span id="rollnoerror"></span><br>
+<div id="Phone"><label id="phone">Phone Number: </label><input type="text" name="phone" onBlur="check('phone',this.value)" 
+onkeyup="check('phone',this.value)"></div><span id="phoneerror"></span><br>
+<div id="EmailId"><label id="email">Email Address:</label><input type="text" name="email" onBlur="check('email',this.value)" 
+onkeyup="check('email',this.value)"></div><span id="emailerror"></span><br>
+ <label id="dept">Department:    </label><select name="dept">
+  <option value="mech">Mech</option>
+  <option value="civil">Civil</option>
+  <option value="eee">EEE</option>
+  <option value="cs">CS</option>
+  <option value="prod">Prod</option>
+  <option value="meta">Meta</option>
+  <option value="ice">ICE</option>
+  <option value="arch">Arch</option>
+  <option value="chem">Chem</option>
+</select> <span id="depterror"></span><br><br>
+<div id="Year"><label id="year">Year of study:</label><select name="year">
+  <option value="2016-2020">2016-2020</option>
+  <option value="2015-2019">2015-2019</option>
+  <option value="2017-2021">2017-2021</option>
+  <option value="2014-2018">2014-2018</option></select></div>
+ <label>Submit resume here</label> <input type="file" name="resume">
+<input type="submit" placeholder="SUBMIT" >
+</form>
+</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="main.js" type="text/javascript"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
