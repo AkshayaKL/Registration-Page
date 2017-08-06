@@ -1,6 +1,6 @@
 <?php
-$field=$_GET['field'];
-$query=$_GET['query'];
+$field=$_REQUEST['field'];
+$query=$_REQUEST['query'];
 
 if($field=="name")
 {
@@ -30,7 +30,7 @@ if($field=="phone")
 if($field=="email")
 {
 	if (filter_var($query, FILTER_VALIDATE_EMAIL)) {
-  echo"<span style='color:green'>valid</span>";
+  echo"<span style='color:green'>Valid</span>";
 } else {
   echo"<span style='color:red'>$query is not a valid email address</span>";
 }

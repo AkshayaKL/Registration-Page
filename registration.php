@@ -1,3 +1,13 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Confirmation</title>
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	 <link rel="stylesheet" href="style.css">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
 <?php
 
 $count=0;
@@ -7,8 +17,7 @@ $namefile= $file['name'];
 $path="/var/www/html/uploads/" .basename($namefile);
 if(move_uploaded_file($file['tmp_name'], $path))
 	{
-		echo"<div class='container'>
-  <div class='jumbotron'><p style='color:blue' width='100%' >Resume update was successful</p></div></div>";
+		
 	}
 else
 	{
@@ -17,24 +26,42 @@ else
 		$count++;
 	}
 $conn=mysqli_connect("localhost","root","123","myDB");
-$name=$_POST['name'];
-$rollno=$_POST['rollno'];
-$phone=$_POST['phone'];
-$email=$_POST['email'];
+$name=mysqli_real_escape_string($conn,$_POST['name']);
+
+$rollno=mysqli_real_escape_string($conn,$_POST['rollno']);
+$phone=mysqli_real_escape_string($conn,$_POST['phone']);
+$email=mysqli_real_escape_string($conn,$_POST['email']);
 $dept=$_POST['dept'];
 $year=$_POST['year'];
+if(strlen($name)<5)
+	$count++;
+if(!((strlen($rollno)==9)&&is_numeric($rollno)))
+    $count++;
+if(!((strlen($phone))==10&&is_numeric($phone)))
+	{
+		$count++;
+		
+	}
+if (!(filter_var($email, FILTER_VALIDATE_EMAIL))) 
+	$count++;
+
 if ((!(empty($_POST["name"])))&&(!(empty($_POST["rollno"])))&&(!(empty($_POST["phone"])) )&&(!(empty($_POST["email"])))&&($count==0))
 
 {
-	$sql="INSERT INTO users(name,rollno,phone,email,dept,year,resume)VALUES('$name','$rollno','$phone','$email','$dept','$year','$path')";
+	$sql="INSERT INTO users(name,rollno,phone,email,dept,resume,year)VALUES('$name','$rollno','$phone','$email','$dept','$path','$year')";
 $query=mysqli_query($conn,$sql);
 echo "<div class='container'>
-  <div class='jumbotron'><strong>Registered</strong></div></div>";
+  <div class='jumbotron'><strong><p>Registered</p></strong></div></div>";
 }
 else
 echo "<div class='container'>
-  <div class='jumbotron'><strong>Register Again</strong></div></div>";
+  <div class='jumbotron' style='color:red'><strong><p>Go Back and register Again,not a valid form</p></strong></div></div>";
 
 return false;
 
 ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>
