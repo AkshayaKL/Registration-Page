@@ -48,17 +48,31 @@ if (!(filter_var($email, FILTER_VALIDATE_EMAIL)))
 if ((!(empty($_POST["name"])))&&(!(empty($_POST["rollno"])))&&(!(empty($_POST["phone"])) )&&(!(empty($_POST["email"])))&&($count==0))
 
 {
-	$sql="INSERT INTO users(name,rollno,phone,email,dept,resume,year)VALUES('$name','$rollno','$phone','$email','$dept','$path','$year')";
-$query=mysqli_query($conn,$sql);
+	$sql="INSERT INTO users(name,rollno,phone,email,dept,resume,year)VALUES(?,?,?,?,?,?,?)";
+    $stmt=mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+    	echo "<div class='container'>
+  <div class='jumbotron'><strong><p>Failed sql</p></strong></div></div>";
+
+    }
+else
+{
+	mysqli_stmt_bind_param($stmt,"sssssss",$name,$rollno,$phone,$email,$dept,$path,$year);
+	mysqli_stmt_execute($stmt);
+
+}
+
 echo "<div class='container'>
   <div class='jumbotron'><strong><p>Registered</p></strong></div></div>";
 }
 else
+{
 echo "<div class='container'>
   <div class='jumbotron' style='color:red'><strong><p>Go Back and register Again,not a valid form</p></strong></div></div>";
 
 return false;
-
+}
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

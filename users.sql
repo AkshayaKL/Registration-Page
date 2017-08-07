@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `rollno` int(11) DEFAULT NULL,
-  `phone` int(11) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
   `dept` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `year` varchar(255) DEFAULT NULL,
